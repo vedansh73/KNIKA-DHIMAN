@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KANIKA DHIMAN - Official Art Studio & Live Hub</title>
+
+    <!-- 🔒 SECURITY HEADERS (XSS, Clickjacking & Data Protection) -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://cdnjs.cloudflare.com https://fonts.googleapis.com https://fonts.gstatic.com https://img.youtube.com https://www.youtube.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https://img.youtube.com https://i.ytimg.com; frame-src https://www.youtube.com https://www.youtube-nocookie.com;">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <!-- Font Awesome & Aesthetic Art Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            user-select: none; /* Basic content copy protection */
+        }
+
+        :root {
+            --art-pink: #ff2a85;
+            --art-purple: #8a2be2;
+            --art-gold: #ffd166;
+            --art-cyan: #00f5d4;
+            --bg-canvas: #0b0914;
+            --card-glass: rgba(25, 20, 42, 0.78);
+            --text-light: #ffffff;
+            --text-muted: #c4bfe0;
+        }
+
+        /* Zero-Scroll Full Screen Lock */
+        html, body {
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background-color: var(--bg-canvas);
+            color: var(--text-light);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Animated Watercolor & Aurora Canvas Background */
+        .art-bg {
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(255, 42, 133, 0.22), transparent 40%),
+                radial-gradient(circle at 70% 60%, rgba(138, 43, 226, 0.25), transparent 45%),
+                radial-gradient(circle at 50% 80%, rgba(0, 245, 212, 0.15), transparent 40%);
+            z-index: -2;
+            animation: brushSwirl 14s infinite alternate ease-in-out;
+        }
+
+        @keyframes brushSwirl {
+            0% { transform: rotate(0deg) scale(1); }
+            100% { transform: rotate(8deg) scale(1.08); }
+        }
+
+        /* Floating Art Icons Animation */
+        .floating-palette {
+            position: fixed;
+            color: rgba(255, 255, 255, 0.05);
+            font-size: 90px;
+            z-index: -1;
+            animation: floatArt 8s infinite ease-in-out;
+        }
+        .fp-1 { top: 12%; left: 5%; animation-delay: 0s; }
+        .fp-2 { bottom: 15%; right: 6%; animation-delay: 3s; }
+
+        @keyframes floatArt {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-18px) rotate(10deg); }
+        }
+
+        /* Header */
+        header {
+            height: 54px;
+            padding: 0 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(11, 9, 20, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 42, 133, 0.4);
+            box-shadow: 0 4px 20px rgba(138, 43, 226, 0.25);
+        }
+
+        .brand {
+            font-family: 'Cinzel Decorative', cursive;
+            font-size: 20px;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            background: linear-gradient(90deg, #fff, var(--art-gold), var(--art-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand i {
+            -webkit-text-fill-color: var(--art-pink);
+            animation: paletteSpin 6s infinite linear;
+        }
+
+        @keyframes paletteSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .header-btns {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-art {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            color: #fff;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: 0.3s;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .btn-yt {
+            background: linear-gradient(45deg, #ff0000, #ff4d6d);
+            box-shadow: 0 0 12px rgba(255, 0, 0, 0.5);
+        }
+
+        .btn-insta {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            box-shadow: 0 0 12px rgba(220, 39, 67, 0.5);
+        }
+
+        .btn-art:hover {
+            transform: translateY(-2px) scale(1.04);
+        }
+
+        /* Main Single Screen Grid */
+        main {
+            flex: 1;
+            padding: 10px 22px;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            gap: 10px;
+            max-width: 1280px;
+            margin: 0 auto;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        /* Hero & Speciality Strip */
+        .hero-box {
+            text-align: center;
+            padding: 4px 0;
+        }
+
+        .hero-box h1 {
+            font-family: 'Cinzel Decorative', cursive;
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            background: linear-gradient(90deg, var(--art-cyan), #ffffff, var(--art-pink), var(--art-gold));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shineText 4s linear infinite;
+        }
+
+        @keyframes shineText {
+            to { background-position: 200% center; }
+        }
+
+        .speciality-badges {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 6px;
+        }
+
+        .badge-pill {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 209, 102, 0.4);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--art-gold);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            animation: glowPill 2.5s infinite alternate;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: #ff0000;
+            border-radius: 50%;
+            display: inline-block;
+            animation: blinkLive 1s infinite;
+        }
+
+        @keyframes blinkLive {
+            0%, 100% { opacity: 1; transform: scale(1.2); }
+            50% { opacity: 0.3; transform: scale(0.8); }
+        }
+
+        @keyframes glowPill {
+            0% { box-shadow: 0 0 4px rgba(255, 42, 133, 0.2); }
+            100% { box-shadow: 0 0 12px rgba(255, 42, 133, 0.6); }
+        }
+
+        /* Center 6 Art Videos Gallery */
+        .gallery-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .gallery-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--art-cyan);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .art-card {
+            background: var(--card-glass);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        .art-card:hover {
+            transform: translateY(-4px) scale(1.03);
+            border-color: var(--art-pink);
+            box-shadow: 0 8px 20px rgba(255, 42, 133, 0.45);
+        }
+
+        .thumb-wrap {
+            position: relative;
+            width: 100%;
+            padding-top: 48%; /* Compact ratio so all 6 fit cleanly */
+            background: #000;
+            overflow: hidden;
+        }
+
+        .thumb-wrap img {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            transition: 0.4s;
+        }
+
+        .art-card:hover .thumb-wrap img {
+            transform: scale(1.08);
+        }
+
+        .play-circle {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 34px; height: 34px;
+            background: linear-gradient(45deg, var(--art-pink), var(--art-purple));
+            border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            color: #fff;
+            font-size: 13px;
+            box-shadow: 0 0 15px rgba(255, 42, 133, 0.9);
+        }
+
+        .card-caption {
+            padding: 5px 10px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Bottom Info & Community Bar */
+        .bottom-strip {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr 1fr;
+            gap: 10px;
+        }
+
+        .info-box {
+            background: var(--card-glass);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 8px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .info-box h4 {
+            font-size: 12px;
+            color: var(--art-gold);
+            margin-bottom: 2px;
+        }
+
+        .info-box p {
+            font-size: 10.5px;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        footer {
+            height: 28px;
+            background: rgba(6, 5, 12, 0.95);
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding: 0 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+
+        .security-tag {
+            color: var(--art-cyan);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Embedded Video Modal Player */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(5, 4, 10, 0.92);
+            backdrop-filter: blur(8px);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+        }
+
+        .modal-box {
+            position: relative;
+            width: 100%;
+            max-width: 820px;
+            background: #000;
+            border-radius: 16px;
+            border: 2px solid var(--art-pink);
+            box-shadow: 0 0 35px rgba(255, 42, 133, 0.6);
+            overflow: hidden;
+        }
+
+        .iframe-ratio {
+            position: relative;
+            padding-top: 56.25%;
+        }
+
+        .iframe-ratio iframe {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            border: none;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 14px;
+            background: var(--art-pink);
+            color: #fff;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        /* Mobile Adjustments (Still Zero-Scroll) */
+        @media (max-width: 768px) {
+            .brand { font-size: 15px; }
+            .hero-box h1 { font-size: 20px; }
+            .video-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+            .thumb-wrap { padding-top: 44%; }
+            .bottom-strip { grid-template-columns: 1fr; gap: 6px; }
+            .info-box { padding: 6px 10px; }
+            .badge-pill { font-size: 9.5px; padding: 3px 8px; }
+        }
+    </style>
+</head>
+<body oncontextmenu="return false;">
+
+    <!-- Animated Art Background & Floating Icons -->
+    <div class="art-bg"></div>
+    <i class="fas fa-palette floating-palette fp-1"></i>
+    <i class="fas fa-paint-brush floating-palette fp-2"></i>
+
+    <!-- Top Header -->
+    <header>
+        <div class="brand">
+            <i class="fas fa-palette"></i> KANIKA DHIMAN
+        </div>
+        <div class="header-btns">
+            <a href="https://www.youtube.com/@ArtWithKanikaDhimaan" target="_blank" rel="noopener noreferrer" class="btn-art btn-yt">
+                <i class="fab fa-youtube"></i> Subscribe
+            </a>
+            <a href="https://www.instagram.com/kanika97836?igsh=MWFqdzdwNDM2dGI2Ng%3D%3D" target="_blank" rel="noopener noreferrer" class="btn-art btn-insta">
+                <i class="fab fa-instagram"></i> Instagram
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Single-Screen Dashboard -->
+    <main>
+        <!-- Hero & Speciality Badges -->
+        <div class="hero-box">
+            <h1>KANIKA DHIMAN</h1>
+            <div class="speciality-badges">
+                <span class="badge-pill"><span class="live-dot"></span> YouTube Live Stream</span>
+                <span class="badge-pill"><i class="fas fa-users"></i> Free Subscribers & Support</span>
+                <span class="badge-pill"><i class="fas fa-heart"></i> Make New Friends</span>
+                <span class="badge-pill"><i class="fas fa-paint-brush"></i> Sketching & Art Studio</span>
+            </div>
+        </div>
+
+        <!-- 6 Embedded Art Videos Grid -->
+        <div class="gallery-section">
+            <div class="gallery-header">
+                <span><i class="fas fa-sparkles"></i> Featured Artworks & Videos (Click to Watch Here)</span>
+                <span>@ArtWithKanikaDhimaan</span>
+            </div>
+            <div class="video-grid" id="art-video-grid">
+                <!-- 6 Videos rendered automatically -->
+            </div>
+        </div>
+
+        <!-- Bottom Speciality & Social Cards -->
+        <div class="bottom-strip">
+            <div class="info-box">
+                <div>
+                    <h4><i class="fas fa-broadcast-tower"></i> Live Stream Speciality</h4>
+                    <p>Join YouTube Live: Gain Subscribers, Shoutouts & Make New Friends!</p>
+                </div>
+                <a href="https://www.youtube.com/@ArtWithKanikaDhimaan/live" target="_blank" rel="noopener noreferrer" class="btn-art btn-yt" style="font-size:11px;">Join Live</a>
+            </div>
+
+            <div class="info-box">
+                <div>
+                    <h4><i class="fab fa-youtube"></i> Official YouTube</h4>
+                    <p>@ArtWithKanikaDhimaan</p>
+                </div>
+                <a href="https://www.youtube.com/@ArtWithKanikaDhimaan" target="_blank" rel="noopener noreferrer" class="btn-art" style="background:var(--art-purple); font-size:11px;">Open</a>
+            </div>
+
+            <div class="info-box">
+                <div>
+                    <h4><i class="fab fa-instagram"></i> Connect on Insta</h4>
+                    <p>@kanika97836</p>
+                </div>
+                <a href="https://www.instagram.com/kanika97836?igsh=MWFqdzdwNDM2dGI2Ng%3D%3D" target="_blank" rel="noopener noreferrer" class="btn-art btn-insta" style="font-size:11px;">Follow</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Secure Footer -->
+    <footer>
+        <span>&copy; 2026 KANIKA DHIMAN | Art With Kanika Dhimaan</span>
+        <span class="security-tag"><i class="fas fa-shield-alt"></i> CSP & Frame-Guard Protected</span>
+    </footer>
+
+    <!-- Popup Video Player Modal -->
+    <div id="videoModal" class="modal">
+        <div class="modal-box">
+            <span class="close-modal" onclick="closePlayer()">&times;</span>
+            <div class="iframe-ratio">
+                <iframe id="ytPlayer" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript & Security Script -->
+    <script>
+        // 🔒 Frame-Busting Anti-Clickjacking Guard
+        if (window.top !== window.self) {
+            window.top.location = window.self.location;
+        }
+
+        // 🔒 Disable DevTools Shortcuts (F12, Ctrl+Shift+I, Ctrl+U)
+        document.addEventListener('keydown', function(e) {
+            if (
+                e.key === 'F12' ||
+                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) ||
+                (e.ctrlKey && e.key === 'u')
+            ) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // 🎨 Kanika Dhiman's 6 YouTube Videos
+        const artVideos = [
+            { id: "5AL7ygIDYlM", title: "Art Creation #1" },
+            { id: "ys9btLwkuxw", title: "Creative Sketch #2" },
+            { id: "5sTrCXwNhUs", title: "Art Special #3" },
+            { id: "DPCnSoYJAFs", title: "Painting Showcase #4" },
+            { id: "gnwXKeMIcF4", title: "Artistic Video #5" },
+            { id: "LlHQifg85a0", title: "Kanika's Art #6" }
+        ];
+
+        const grid = document.getElementById('art-video-grid');
+
+        artVideos.forEach(video => {
+            const card = document.createElement('div');
+            card.className = 'art-card';
+            card.onclick = () => openPlayer(video.id);
+            card.innerHTML = `
+                <div class="thumb-wrap">
+                    <img src="https://img.youtube.com/vi/${video.id}/hqdefault.jpg" alt="${video.title}" loading="lazy">
+                    <div class="play-circle"><i class="fas fa-play"></i></div>
+                </div>
+                <div class="card-caption">
+                    <span>${video.title}</span>
+                    <i class="fas fa-paint-brush" style="color: var(--art-gold); font-size: 10px;"></i>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+
+        // Privacy-Enhanced YouTube Embed Player
+        function openPlayer(videoId) {
+            const modal = document.getElementById('videoModal');
+            const iframe = document.getElementById('ytPlayer');
+            // Using youtube-nocookie.com for extra privacy & security
+            iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`;
+            modal.style.display = 'flex';
+        }
+
+        function closePlayer() {
+            const modal = document.getElementById('videoModal');
+            const iframe = document.getElementById('ytPlayer');
+            iframe.src = '';
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('videoModal');
+            if (event.target === modal) {
+                closePlayer();
+            }
+        };
+    </script>
+</body>
+</html>
