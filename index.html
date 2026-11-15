@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KANIKA DHIMAN - Official Art Studio & Live Hub</title>
+    <title>KANIKA DHIMAN | The Canvas of Creativity & Live Art</title>
 
-    <!-- 🔒 SECURITY HEADERS (XSS, Clickjacking & Data Protection) -->
+    <!-- 🔒 SECURITY HEADERS -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://cdnjs.cloudflare.com https://fonts.googleapis.com https://fonts.gstatic.com https://img.youtube.com https://www.youtube.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; script-src 'self' 'unsafe-inline'; img-src 'self' data: https://img.youtube.com https://i.ytimg.com; frame-src https://www.youtube.com https://www.youtube-nocookie.com;">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta name="referrer" content="strict-origin-when-cross-origin">
 
     <!-- Font Awesome & Aesthetic Art Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Playfair+Display:ital,wght@0,700;1,600&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <style>
         * {
@@ -20,507 +20,669 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
-            user-select: none; /* Basic content copy protection */
+            user-select: none;
         }
 
         :root {
-            --art-pink: #ff2a85;
-            --art-purple: #8a2be2;
-            --art-gold: #ffd166;
-            --art-cyan: #00f5d4;
-            --bg-canvas: #0b0914;
-            --card-glass: rgba(25, 20, 42, 0.78);
-            --text-light: #ffffff;
-            --text-muted: #c4bfe0;
+            --pink: #ff2a85;
+            --purple: #8a2be2;
+            --gold: #ffd166;
+            --cyan: #00f5d4;
+            --dark-bg: #080612;
+            --glass: rgba(24, 18, 44, 0.72);
         }
 
-        /* Zero-Scroll Full Screen Lock */
-        html, body {
-            width: 100%;
-            height: 100vh;
-            overflow: hidden;
-            background-color: var(--bg-canvas);
-            color: var(--text-light);
+        body {
+            background-color: var(--dark-bg);
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
             display: flex;
             flex-direction: column;
         }
 
-        /* Animated Watercolor & Aurora Canvas Background */
-        .art-bg {
+        /* Interactive Live Paint Canvas Background */
+        #paintCanvas {
             position: fixed;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: 
-                radial-gradient(circle at 30% 30%, rgba(255, 42, 133, 0.22), transparent 40%),
-                radial-gradient(circle at 70% 60%, rgba(138, 43, 226, 0.25), transparent 45%),
-                radial-gradient(circle at 50% 80%, rgba(0, 245, 212, 0.15), transparent 40%);
-            z-index: -2;
-            animation: brushSwirl 14s infinite alternate ease-in-out;
-        }
-
-        @keyframes brushSwirl {
-            0% { transform: rotate(0deg) scale(1); }
-            100% { transform: rotate(8deg) scale(1.08); }
-        }
-
-        /* Floating Art Icons Animation */
-        .floating-palette {
-            position: fixed;
-            color: rgba(255, 255, 255, 0.05);
-            font-size: 90px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             z-index: -1;
-            animation: floatArt 8s infinite ease-in-out;
-        }
-        .fp-1 { top: 12%; left: 5%; animation-delay: 0s; }
-        .fp-2 { bottom: 15%; right: 6%; animation-delay: 3s; }
-
-        @keyframes floatArt {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-18px) rotate(10deg); }
+            pointer-events: none;
         }
 
-        /* Header */
+        /* Animated Navigation Header */
         header {
-            height: 54px;
-            padding: 0 22px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(8, 6, 18, 0.85);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 42, 133, 0.35);
+            padding: 14px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(11, 9, 20, 0.9);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 42, 133, 0.4);
-            box-shadow: 0 4px 20px rgba(138, 43, 226, 0.25);
+            flex-wrap: wrap;
+            gap: 15px;
+            box-shadow: 0 5px 25px rgba(138, 43, 226, 0.3);
         }
 
-        .brand {
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .brand-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--pink), var(--purple));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            color: #fff;
+            box-shadow: 0 0 18px var(--pink);
+            animation: floatBounce 3s infinite ease-in-out;
+        }
+
+        @keyframes floatBounce {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-5px) rotate(12deg); }
+        }
+
+        .brand-text h2 {
             font-family: 'Cinzel Decorative', cursive;
             font-size: 20px;
             font-weight: 900;
-            letter-spacing: 1.5px;
-            background: linear-gradient(90deg, #fff, var(--art-gold), var(--art-pink));
+            background: linear-gradient(90deg, #fff, var(--gold), var(--pink));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+        }
+
+        .brand-text span {
+            font-size: 10px;
+            color: var(--cyan);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: block;
+        }
+
+        /* Multi-Page Navigation Tabs */
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+            padding: 8px 18px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.35s ease;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 7px;
         }
 
-        .brand i {
-            -webkit-text-fill-color: var(--art-pink);
-            animation: paletteSpin 6s infinite linear;
+        .nav-btn:hover, .nav-btn.active {
+            background: linear-gradient(45deg, var(--pink), var(--purple));
+            border-color: var(--gold);
+            box-shadow: 0 0 18px rgba(255, 42, 133, 0.6);
+            transform: translateY(-2px);
         }
 
-        @keyframes paletteSpin {
-            0% { transform: rotate(0deg); }
+        /* Multi-Page Container & Transitions */
+        main {
+            flex: 1;
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 35px 20px;
+        }
+
+        .page-section {
+            display: none;
+            animation: pageReveal 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        @keyframes pageReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.97);
+                filter: blur(6px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                filter: blur(0);
+            }
+        }
+
+        /* PAGE 1: HOME HERO */
+        .hero-card {
+            background: var(--glass);
+            border: 1px solid rgba(255, 42, 133, 0.4);
+            border-radius: 24px;
+            padding: 50px 30px;
+            text-align: center;
+            backdrop-filter: blur(14px);
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.6);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-card::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(255, 42, 133, 0.15), transparent 30%);
+            animation: rotateAura 10s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes rotateAura {
             100% { transform: rotate(360deg); }
         }
 
-        .header-btns {
-            display: flex;
-            gap: 10px;
-        }
-
-        .btn-art {
-            padding: 6px 14px;
-            border-radius: 20px;
+        .art-subtitle {
+            display: inline-block;
+            padding: 6px 18px;
+            border-radius: 30px;
+            background: rgba(0, 245, 212, 0.12);
+            border: 1px solid var(--cyan);
+            color: var(--cyan);
             font-size: 12px;
             font-weight: 600;
-            text-decoration: none;
-            color: #fff;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: 0.3s;
-            border: 1px solid rgba(255,255,255,0.15);
-        }
-
-        .btn-yt {
-            background: linear-gradient(45deg, #ff0000, #ff4d6d);
-            box-shadow: 0 0 12px rgba(255, 0, 0, 0.5);
-        }
-
-        .btn-insta {
-            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-            box-shadow: 0 0 12px rgba(220, 39, 67, 0.5);
-        }
-
-        .btn-art:hover {
-            transform: translateY(-2px) scale(1.04);
-        }
-
-        /* Main Single Screen Grid */
-        main {
-            flex: 1;
-            padding: 10px 22px;
-            display: grid;
-            grid-template-rows: auto 1fr auto;
-            gap: 10px;
-            max-width: 1280px;
-            margin: 0 auto;
-            width: 100%;
-            overflow: hidden;
-        }
-
-        /* Hero & Speciality Strip */
-        .hero-box {
-            text-align: center;
-            padding: 4px 0;
-        }
-
-        .hero-box h1 {
-            font-family: 'Cinzel Decorative', cursive;
-            font-size: 28px;
-            font-weight: 900;
             letter-spacing: 2px;
-            background: linear-gradient(90deg, var(--art-cyan), #ffffff, var(--art-pink), var(--art-gold));
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+
+        .hero-title {
+            font-family: 'Cinzel Decorative', cursive;
+            font-size: 46px;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 12px;
+            background: linear-gradient(90deg, var(--cyan), #ffffff, var(--pink), var(--gold));
             background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: shineText 4s linear infinite;
+            animation: gradientFlow 4s linear infinite;
         }
 
-        @keyframes shineText {
+        @keyframes gradientFlow {
             to { background-position: 200% center; }
         }
 
-        .speciality-badges {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 6px;
+        .hero-tagline {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 20px;
+            color: var(--gold);
+            margin-bottom: 22px;
         }
 
-        .badge-pill {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 209, 102, 0.4);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--art-gold);
+        .hero-desc {
+            max-width: 680px;
+            margin: 0 auto 30px;
+            color: #d0cbe8;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .cta-group {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--pink), var(--purple));
+            color: #fff;
+            border: none;
+            padding: 13px 28px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            animation: glowPill 2.5s infinite alternate;
+            gap: 10px;
+            box-shadow: 0 0 20px rgba(255, 42, 133, 0.6);
+            transition: 0.3s;
         }
 
-        .live-dot {
-            width: 8px;
-            height: 8px;
-            background: #ff0000;
-            border-radius: 50%;
-            display: inline-block;
-            animation: blinkLive 1s infinite;
+        .btn-primary:hover {
+            transform: scale(1.07);
+            box-shadow: 0 0 30px rgba(255, 42, 133, 0.95);
         }
 
-        @keyframes blinkLive {
-            0%, 100% { opacity: 1; transform: scale(1.2); }
-            50% { opacity: 0.3; transform: scale(0.8); }
-        }
-
-        @keyframes glowPill {
-            0% { box-shadow: 0 0 4px rgba(255, 42, 133, 0.2); }
-            100% { box-shadow: 0 0 12px rgba(255, 42, 133, 0.6); }
-        }
-
-        /* Center 6 Art Videos Gallery */
-        .gallery-section {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .gallery-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-            font-size: 13px;
+        .btn-outline {
+            background: transparent;
+            color: var(--gold);
+            border: 2px solid var(--gold);
+            padding: 11px 26px;
+            border-radius: 30px;
+            font-size: 14px;
             font-weight: 700;
-            color: var(--art-cyan);
-            letter-spacing: 1px;
-            text-transform: uppercase;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s;
+        }
+
+        .btn-outline:hover {
+            background: var(--gold);
+            color: #080612;
+            transform: scale(1.05);
+        }
+
+        /* PAGE 2: ART GALLERY (6 VIDEOS) */
+        .section-heading {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .section-heading h2 {
+            font-family: 'Cinzel Decorative', cursive;
+            font-size: 32px;
+            color: var(--gold);
+            margin-bottom: 8px;
+        }
+
+        .section-heading p {
+            color: #bdb6db;
+            font-size: 14px;
         }
 
         .video-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+            gap: 24px;
         }
 
-        .art-card {
-            background: var(--card-glass);
-            border-radius: 12px;
+        .video-card {
+            background: var(--glass);
+            border-radius: 18px;
             overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.12);
             cursor: pointer;
-            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
         }
 
-        .art-card:hover {
-            transform: translateY(-4px) scale(1.03);
-            border-color: var(--art-pink);
-            box-shadow: 0 8px 20px rgba(255, 42, 133, 0.45);
+        .video-card:hover {
+            transform: translateY(-10px) rotateX(4deg);
+            border-color: var(--cyan);
+            box-shadow: 0 15px 35px rgba(0, 245, 212, 0.35);
         }
 
-        .thumb-wrap {
+        .thumb-box {
             position: relative;
-            width: 100%;
-            padding-top: 48%; /* Compact ratio so all 6 fit cleanly */
+            padding-top: 56.25%;
             background: #000;
             overflow: hidden;
         }
 
-        .thumb-wrap img {
+        .thumb-box img {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             object-fit: cover;
-            transition: 0.4s;
+            transition: transform 0.5s ease;
         }
 
-        .art-card:hover .thumb-wrap img {
-            transform: scale(1.08);
+        .video-card:hover .thumb-box img {
+            transform: scale(1.1);
         }
 
-        .play-circle {
+        .play-overlay {
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            width: 34px; height: 34px;
-            background: linear-gradient(45deg, var(--art-pink), var(--art-purple));
+            width: 56px; height: 56px;
+            background: linear-gradient(45deg, var(--pink), var(--purple));
             border-radius: 50%;
             display: flex; justify-content: center; align-items: center;
+            font-size: 20px;
             color: #fff;
-            font-size: 13px;
-            box-shadow: 0 0 15px rgba(255, 42, 133, 0.9);
+            box-shadow: 0 0 25px var(--pink);
+            transition: 0.3s;
         }
 
-        .card-caption {
-            padding: 5px 10px;
-            font-size: 11px;
+        .video-card:hover .play-overlay {
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+
+        .card-body {
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-body h3 {
+            font-size: 16px;
             font-weight: 600;
-            color: #fff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
 
-        /* Bottom Info & Community Bar */
-        .bottom-strip {
+        /* PAGE 3: LIVE & SPECIALITY */
+        .speciality-grid {
             display: grid;
-            grid-template-columns: 1.4fr 1fr 1fr;
-            gap: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 22px;
         }
 
-        .info-box {
-            background: var(--card-glass);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 8px 14px;
+        .spec-card {
+            background: var(--glass);
+            border: 1px solid rgba(255, 209, 102, 0.3);
+            border-radius: 20px;
+            padding: 30px 24px;
+            text-align: center;
+            transition: 0.4s;
+            position: relative;
+        }
+
+        .spec-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--pink);
+            box-shadow: 0 12px 30px rgba(255, 42, 133, 0.35);
+        }
+
+        .spec-icon {
+            width: 65px;
+            height: 65px;
+            margin: 0 auto 18px;
+            border-radius: 50%;
+            background: rgba(255, 42, 133, 0.15);
+            border: 1px solid var(--pink);
             display: flex;
+            justify-content: center;
             align-items: center;
-            justify-content: space-between;
+            font-size: 26px;
+            color: var(--gold);
+            animation: pulseRing 2s infinite;
         }
 
-        .info-box h4 {
-            font-size: 12px;
-            color: var(--art-gold);
-            margin-bottom: 2px;
+        @keyframes pulseRing {
+            0% { box-shadow: 0 0 0 0 rgba(255, 42, 133, 0.6); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 42, 133, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 42, 133, 0); }
         }
 
-        .info-box p {
-            font-size: 10.5px;
-            color: var(--text-muted);
+        .spec-card h3 {
+            font-size: 19px;
+            color: var(--cyan);
+            margin-bottom: 10px;
         }
 
-        /* Footer */
-        footer {
-            height: 28px;
-            background: rgba(6, 5, 12, 0.95);
-            border-top: 1px solid rgba(255,255,255,0.06);
-            padding: 0 22px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 10px;
-            color: var(--text-muted);
+        .spec-card p {
+            font-size: 13.5px;
+            color: #d0cbe8;
+            line-height: 1.6;
         }
 
-        .security-tag {
-            color: var(--art-cyan);
-            display: flex;
-            align-items: center;
-            gap: 4px;
+        /* PAGE 4: CONNECT / SOCIALS */
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            max-width: 850px;
+            margin: 0 auto;
         }
 
-        /* Embedded Video Modal Player */
+        .social-box {
+            background: var(--glass);
+            border-radius: 22px;
+            padding: 35px 25px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.15);
+            transition: 0.4s;
+        }
+
+        .social-box:hover {
+            transform: scale(1.04);
+        }
+
+        .yt-box { border-color: rgba(255, 0, 0, 0.5); box-shadow: 0 0 25px rgba(255, 0, 0, 0.2); }
+        .ig-box { border-color: rgba(225, 48, 108, 0.5); box-shadow: 0 0 25px rgba(225, 48, 108, 0.2); }
+
+        /* Video Modal */
         .modal {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(5, 4, 10, 0.92);
-            backdrop-filter: blur(8px);
+            background: rgba(5, 3, 12, 0.94);
+            backdrop-filter: blur(10px);
             z-index: 3000;
             justify-content: center;
             align-items: center;
-            padding: 15px;
+            padding: 20px;
         }
 
-        .modal-box {
+        .modal-content {
             position: relative;
             width: 100%;
-            max-width: 820px;
+            max-width: 880px;
             background: #000;
-            border-radius: 16px;
-            border: 2px solid var(--art-pink);
-            box-shadow: 0 0 35px rgba(255, 42, 133, 0.6);
+            border-radius: 18px;
+            border: 2px solid var(--pink);
+            box-shadow: 0 0 40px var(--pink);
             overflow: hidden;
         }
 
-        .iframe-ratio {
+        .iframe-wrap {
             position: relative;
             padding-top: 56.25%;
         }
 
-        .iframe-ratio iframe {
+        .iframe-wrap iframe {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             border: none;
         }
 
-        .close-modal {
+        .close-btn {
             position: absolute;
-            top: 10px;
-            right: 14px;
-            background: var(--art-pink);
+            top: 12px;
+            right: 15px;
+            background: var(--pink);
             color: #fff;
-            width: 30px;
-            height: 30px;
+            width: 34px;
+            height: 34px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 18px;
-            font-weight: bold;
+            font-size: 20px;
             cursor: pointer;
             z-index: 10;
         }
 
-        /* Mobile Adjustments (Still Zero-Scroll) */
+        /* Footer */
+        footer {
+            background: rgba(6, 4, 14, 0.95);
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            font-size: 12px;
+            color: #a9a2c7;
+        }
+
         @media (max-width: 768px) {
-            .brand { font-size: 15px; }
-            .hero-box h1 { font-size: 20px; }
-            .video-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-            .thumb-wrap { padding-top: 44%; }
-            .bottom-strip { grid-template-columns: 1fr; gap: 6px; }
-            .info-box { padding: 6px 10px; }
-            .badge-pill { font-size: 9.5px; padding: 3px 8px; }
+            header { justify-content: center; text-align: center; }
+            .hero-title { font-size: 32px; }
+            .hero-tagline { font-size: 16px; }
         }
     </style>
 </head>
 <body oncontextmenu="return false;">
 
-    <!-- Animated Art Background & Floating Icons -->
-    <div class="art-bg"></div>
-    <i class="fas fa-palette floating-palette fp-1"></i>
-    <i class="fas fa-paint-brush floating-palette fp-2"></i>
+    <!-- Live Interactive Paint Particle Canvas -->
+    <canvas id="paintCanvas"></canvas>
 
-    <!-- Top Header -->
+    <!-- Header with Multi-Page Navigation -->
     <header>
-        <div class="brand">
-            <i class="fas fa-palette"></i> KANIKA DHIMAN
+        <div class="brand-logo" onclick="switchPage('home', document.querySelectorAll('.nav-btn')[0])">
+            <div class="brand-icon"><i class="fas fa-palette"></i></div>
+            <div class="brand-text">
+                <h2>KANIKA DHIMAN</h2>
+                <span>The Canvas of Creativity</span>
+            </div>
         </div>
-        <div class="header-btns">
-            <a href="https://www.youtube.com/@ArtWithKanikaDhimaan" target="_blank" rel="noopener noreferrer" class="btn-art btn-yt">
-                <i class="fab fa-youtube"></i> Subscribe
-            </a>
-            <a href="https://www.instagram.com/kanika97836?igsh=MWFqdzdwNDM2dGI2Ng%3D%3D" target="_blank" rel="noopener noreferrer" class="btn-art btn-insta">
-                <i class="fab fa-instagram"></i> Instagram
-            </a>
-        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-btn active" onclick="switchPage('home', this)"><i class="fas fa-home"></i> Home</button>
+            <button class="nav-btn" onclick="switchPage('gallery', this)"><i class="fas fa-paint-brush"></i> Art Gallery (6)</button>
+            <button class="nav-btn" onclick="switchPage('live', this)"><i class="fas fa-broadcast-tower"></i> Live & Speciality</button>
+            <button class="nav-btn" onclick="switchPage('connect', this)"><i class="fas fa-share-alt"></i> Connect</button>
+        </nav>
     </header>
 
-    <!-- Main Single-Screen Dashboard -->
+    <!-- Multi-Page Main Container -->
     <main>
-        <!-- Hero & Speciality Badges -->
-        <div class="hero-box">
-            <h1>KANIKA DHIMAN</h1>
-            <div class="speciality-badges">
-                <span class="badge-pill"><span class="live-dot"></span> YouTube Live Stream</span>
-                <span class="badge-pill"><i class="fas fa-users"></i> Free Subscribers & Support</span>
-                <span class="badge-pill"><i class="fas fa-heart"></i> Make New Friends</span>
-                <span class="badge-pill"><i class="fas fa-paint-brush"></i> Sketching & Art Studio</span>
-            </div>
-        </div>
 
-        <!-- 6 Embedded Art Videos Grid -->
-        <div class="gallery-section">
-            <div class="gallery-header">
-                <span><i class="fas fa-sparkles"></i> Featured Artworks & Videos (Click to Watch Here)</span>
-                <span>@ArtWithKanikaDhimaan</span>
-            </div>
-            <div class="video-grid" id="art-video-grid">
-                <!-- 6 Videos rendered automatically -->
-            </div>
-        </div>
-
-        <!-- Bottom Speciality & Social Cards -->
-        <div class="bottom-strip">
-            <div class="info-box">
-                <div>
-                    <h4><i class="fas fa-broadcast-tower"></i> Live Stream Speciality</h4>
-                    <p>Join YouTube Live: Gain Subscribers, Shoutouts & Make New Friends!</p>
+        <!-- PAGE 1: HOME -->
+        <section id="page-home" class="page-section active">
+            <div class="hero-card">
+                <span class="art-subtitle"><i class="fas fa-sparkles"></i> Welcome to Official Art Studio</span>
+                <h1 class="hero-title">KANIKA DHIMAN</h1>
+                <div class="hero-tagline">"The Canvas of Creativity, Live Art & Friendship"</div>
+                <p class="hero-desc">
+                    Swagat hai <strong>Art With Kanika Dhimaan</strong> ke official digital art world mein! Yahan aapko milengi khubsurat paintings, creative sketches, aur humare <strong>YouTube Live Streams</strong> jahan aap naye dost bana sakte hain aur apna channel grow kar sakte hain.
+                </p>
+                <div class="cta-group">
+                    <button class="btn-primary" onclick="switchPage('gallery', document.querySelectorAll('.nav-btn')[1])">
+                        <i class="fas fa-play-circle"></i> Watch Art Videos
+                    </button>
+                    <button class="btn-outline" onclick="switchPage('live', document.querySelectorAll('.nav-btn')[2])">
+                        <i class="fas fa-users"></i> Join Live & Get Subscribers
+                    </button>
                 </div>
-                <a href="https://www.youtube.com/@ArtWithKanikaDhimaan/live" target="_blank" rel="noopener noreferrer" class="btn-art btn-yt" style="font-size:11px;">Join Live</a>
             </div>
+        </section>
 
-            <div class="info-box">
-                <div>
-                    <h4><i class="fab fa-youtube"></i> Official YouTube</h4>
-                    <p>@ArtWithKanikaDhimaan</p>
-                </div>
-                <a href="https://www.youtube.com/@ArtWithKanikaDhimaan" target="_blank" rel="noopener noreferrer" class="btn-art" style="background:var(--art-purple); font-size:11px;">Open</a>
+        <!-- PAGE 2: ART GALLERY (ALL 6 VIDEOS) -->
+        <section id="page-gallery" class="page-section">
+            <div class="section-heading">
+                <h2><i class="fas fa-palette"></i> Masterpiece Art Gallery</h2>
+                <p>Kisi bhi artwork thumbnail par click karein aur website ke andar hi HD video dekhein</p>
             </div>
+            <div class="video-grid" id="video-gallery-grid">
+                <!-- 6 Videos rendered dynamically -->
+            </div>
+        </section>
 
-            <div class="info-box">
-                <div>
-                    <h4><i class="fab fa-instagram"></i> Connect on Insta</h4>
-                    <p>@kanika97836</p>
-                </div>
-                <a href="https://www.instagram.com/kanika97836?igsh=MWFqdzdwNDM2dGI2Ng%3D%3D" target="_blank" rel="noopener noreferrer" class="btn-art btn-insta" style="font-size:11px;">Follow</a>
+        <!-- PAGE 3: LIVE & SPECIALITY -->
+        <section id="page-live" class="page-section">
+            <div class="section-heading">
+                <h2><i class="fas fa-star"></i> Channel Specialities & Live Hub</h2>
+                <p>Humari community aur YouTube Live ki khaas baatein</p>
             </div>
-        </div>
+            <div class="speciality-grid">
+                <div class="spec-card">
+                    <div class="spec-icon"><i class="fas fa-video"></i></div>
+                    <h3>YouTube Live Streams</h3>
+                    <p>Rozana interactive live sessions jahan live drawing, baatcheet aur masti hoti hai.</p>
+                </div>
+                <div class="spec-card">
+                    <div class="spec-icon"><i class="fas fa-user-plus"></i></div>
+                    <h3>Free Subscribers Support</h3>
+                    <p>Live stream mein judkar aap active members se real subscribers aur support pa sakte hain.</p>
+                </div>
+                <div class="spec-card">
+                    <div class="spec-icon"><i class="fas fa-heart"></i></div>
+                    <h3>Make New Friends</h3>
+                    <p>Ek positive aur friendly art family jahan naye dost bante hain aur sab ek dusre ko support karte hain.</p>
+                </div>
+                <div class="spec-card">
+                    <div class="spec-icon"><i class="fas fa-paint-brush"></i></div>
+                    <h3>Creative Artworks</h3>
+                    <p>Unique sketching, painting techniques aur step-by-step art tutorials sabke liye.</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 35px;">
+                <a href="https://www.youtube.com/@ArtWithKanikaDhimaan" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                    <i class="fab fa-youtube"></i> Join YouTube Live Now
+                </a>
+            </div>
+        </section>
+
+        <!-- PAGE 4: CONNECT / SOCIALS -->
+        <section id="page-connect" class="page-section">
+            <div class="section-heading">
+                <h2><i class="fas fa-globe"></i> Connect With Kanika Dhiman</h2>
+                <p>Humare official social media handles par judne ke liye niche click karein</p>
+            </div>
+            <div class="social-grid">
+                <div class="social-box yt-box">
+                    <i class="fab fa-youtube" style="font-size: 50px; color: #ff0000; margin-bottom: 15px;"></i>
+                    <h3 style="font-size: 22px; margin-bottom: 8px;">Official YouTube Channel</h3>
+                    <p style="color: #ccc; font-size: 14px; margin-bottom: 20px;">@ArtWithKanikaDhimaan</p>
+                    <a href="https://www.youtube.com/@ArtWithKanikaDhimaan" target="_blank" rel="noopener noreferrer" class="btn-primary" style="background: #ff0000;">
+                        <i class="fab fa-youtube"></i> Subscribe Channel
+                    </a>
+                </div>
+
+                <div class="social-box ig-box">
+                    <i class="fab fa-instagram" style="font-size: 50px; color: #ff2a85; margin-bottom: 15px;"></i>
+                    <h3 style="font-size: 22px; margin-bottom: 8px;">Official Instagram</h3>
+                    <p style="color: #ccc; font-size: 14px; margin-bottom: 20px;">@kanika97836</p>
+                    <a href="https://www.instagram.com/kanika97836?igsh=MWFqdzdwNDM2dGI2Ng%3D%3D" target="_blank" rel="noopener noreferrer" class="btn-primary" style="background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);">
+                        <i class="fab fa-instagram"></i> Follow on Instagram
+                    </a>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <!-- Secure Footer -->
     <footer>
-        <span>&copy; 2026 KANIKA DHIMAN | Art With Kanika Dhimaan</span>
-        <span class="security-tag"><i class="fas fa-shield-alt"></i> CSP & Frame-Guard Protected</span>
+        <span>&copy; 2026 KANIKA DHIMAN | The Canvas of Creativity</span>
+        <span style="color: var(--cyan);"><i class="fas fa-shield-alt"></i> Secured with CSP & Frame-Protection</span>
     </footer>
 
-    <!-- Popup Video Player Modal -->
+    <!-- Video Player Popup Modal -->
     <div id="videoModal" class="modal">
-        <div class="modal-box">
-            <span class="close-modal" onclick="closePlayer()">&times;</span>
-            <div class="iframe-ratio">
-                <iframe id="ytPlayer" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeVideo()">&times;</span>
+            <div class="iframe-wrap">
+                <iframe id="playerFrame" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             </div>
         </div>
     </div>
 
-    <!-- JavaScript & Security Script -->
+    <!-- JavaScript: Multi-Page Switcher, Live Paint Canvas Animation & Security -->
     <script>
-        // 🔒 Frame-Busting Anti-Clickjacking Guard
+        // 🔒 Security: Anti-Clickjacking Frame Buster
         if (window.top !== window.self) {
             window.top.location = window.self.location;
         }
 
-        // 🔒 Disable DevTools Shortcuts (F12, Ctrl+Shift+I, Ctrl+U)
+        // 🔒 Security: Block DevTools Shortcuts
         document.addEventListener('keydown', function(e) {
             if (
                 e.key === 'F12' ||
@@ -532,57 +694,108 @@
             }
         });
 
-        // 🎨 Kanika Dhiman's 6 YouTube Videos
-        const artVideos = [
-            { id: "5AL7ygIDYlM", title: "Art Creation #1" },
-            { id: "ys9btLwkuxw", title: "Creative Sketch #2" },
-            { id: "5sTrCXwNhUs", title: "Art Special #3" },
-            { id: "DPCnSoYJAFs", title: "Painting Showcase #4" },
-            { id: "gnwXKeMIcF4", title: "Artistic Video #5" },
-            { id: "LlHQifg85a0", title: "Kanika's Art #6" }
+        // 📄 Multi-Page Navigation Controller
+        function switchPage(pageId, btnElement) {
+            document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById('page-' + pageId).classList.add('active');
+            if (btnElement) btnElement.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 🎬 Render All 6 YouTube Art Videos
+        const videos = [
+            { id: "5AL7ygIDYlM", title: "Kanika's Art Showcase #1" },
+            { id: "ys9btLwkuxw", title: "Creative Sketching #2" },
+            { id: "5sTrCXwNhUs", title: "Artistic Masterpiece #3" },
+            { id: "DPCnSoYJAFs", title: "Vibrant Painting #4" },
+            { id: "gnwXKeMIcF4", title: "Art Studio Special #5" },
+            { id: "LlHQifg85a0", title: "Kanika Dhiman Art #6" }
         ];
 
-        const grid = document.getElementById('art-video-grid');
-
-        artVideos.forEach(video => {
+        const galleryGrid = document.getElementById('video-gallery-grid');
+        videos.forEach(v => {
             const card = document.createElement('div');
-            card.className = 'art-card';
-            card.onclick = () => openPlayer(video.id);
+            card.className = 'video-card';
+            card.onclick = () => playVideo(v.id);
             card.innerHTML = `
-                <div class="thumb-wrap">
-                    <img src="https://img.youtube.com/vi/${video.id}/hqdefault.jpg" alt="${video.title}" loading="lazy">
-                    <div class="play-circle"><i class="fas fa-play"></i></div>
+                <div class="thumb-box">
+                    <img src="https://img.youtube.com/vi/${v.id}/hqdefault.jpg" alt="${v.title}" loading="lazy">
+                    <div class="play-overlay"><i class="fas fa-play"></i></div>
                 </div>
-                <div class="card-caption">
-                    <span>${video.title}</span>
-                    <i class="fas fa-paint-brush" style="color: var(--art-gold); font-size: 10px;"></i>
+                <div class="card-body">
+                    <h3>${v.title}</h3>
+                    <span style="color: var(--gold); font-size: 12px;"><i class="fas fa-palette"></i> Watch</span>
                 </div>
             `;
-            grid.appendChild(card);
+            galleryGrid.appendChild(card);
         });
 
-        // Privacy-Enhanced YouTube Embed Player
-        function openPlayer(videoId) {
-            const modal = document.getElementById('videoModal');
-            const iframe = document.getElementById('ytPlayer');
-            // Using youtube-nocookie.com for extra privacy & security
-            iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`;
-            modal.style.display = 'flex';
+        function playVideo(id) {
+            document.getElementById('playerFrame').src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`;
+            document.getElementById('videoModal').style.display = 'flex';
         }
 
-        function closePlayer() {
-            const modal = document.getElementById('videoModal');
-            const iframe = document.getElementById('ytPlayer');
-            iframe.src = '';
-            modal.style.display = 'none';
+        function closeVideo() {
+            document.getElementById('playerFrame').src = '';
+            document.getElementById('videoModal').style.display = 'none';
         }
 
-        window.onclick = function(event) {
-            const modal = document.getElementById('videoModal');
-            if (event.target === modal) {
-                closePlayer();
-            }
+        window.onclick = function(e) {
+            if (e.target === document.getElementById('videoModal')) closeVideo();
         };
+
+        // 🎨 Interactive Floating Paint Orbs Animation (HTML5 Canvas)
+        const canvas = document.getElementById('paintCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        const colors = ['#ff2a85', '#8a2be2', '#00f5d4', '#ffd166', '#ff6b6b'];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class PaintOrb {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.radius = Math.random() * 60 + 25;
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                this.vx = (Math.random() - 0.5) * 1.2;
+                this.vy = (Math.random() - 0.5) * 1.2;
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            }
+            draw() {
+                ctx.beginPath();
+                const grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.radius);
+                grad.addColorStop(0, this.color + '44');
+                grad.addColorStop(1, 'transparent');
+                ctx.fillStyle = grad;
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < 18; i++) particles.push(new PaintOrb());
+
+        function animateCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateCanvas);
+        }
+        animateCanvas();
     </script>
 </body>
 </html>
